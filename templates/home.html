@@ -1,0 +1,56 @@
+{% extends "main_template.html" %}
+{% block content %}
+	<div class="row category-header">
+		<div class="col-6 center-vertical">
+			Category: <select name="categories" id="category_id" onchange="categoryChanged()">
+				<option value="0">All</option>
+				{% if categories %}
+					{% for category in categories %}
+						<option value="{{category.id}}">{{category.name}}</option>
+					{% endfor %}
+				{% endif %}
+			</select>
+		</div>
+			<div class="col-6 right-align center-vertical">
+				{% if user %}
+					<a href="/createitem">+ New Item</a>
+				{% endif %}
+			</div>
+	</div>
+	<div class="row item-table">
+		<div class="col-12">
+			<table class="col-12">
+				<tr>
+					<th class="col-3">Name</th>
+					<th class="col-3">Description</th>
+					<th class="col-3">Category</th>
+					<th class="col-3">Price</th>
+				</tr>
+				{% for item in items %}
+					<tr class="center-horizontal">
+						<td class="col-3"><a href="/items/{{item.id}}">{{item.name}}</a></td>
+						<td class="col-3">{{item.description}}</td>
+						<td class="col-3">{{item.category.name}}</td>
+						<td class="col-3">{{item.price}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+	<script>
+		var sel = document.getElementById('category_id');
+		var opts = sel.options;
+		for (var opt, j=0; opt=opts[j]; j++) {
+			if(opt.value == {{display_category}}) {
+				sel.selectedIndex = j;
+				break;
+			}
+		}
+
+		function categoryChanged() {
+		    var newCategoryId = document.getElementById("category_id").value;
+		    window.location.href = "/" + newCategoryId;
+		}
+	</script>
+{% endblock %}

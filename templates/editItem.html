@@ -1,0 +1,71 @@
+{% extends "main_template.html" %}
+{% block content %}
+	<div class="row category-header">
+		<div class="col-6 center-vertical">
+				Edit Item
+		</div>
+		<div class="col-6 right-align center-vertical">
+			<a href="/items/{{item.id}}">Cancel</a> | <a href="/items/delete/{{item.id}}">Delete Item</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<form method="post">
+				<table>
+					<tr>
+						<td>
+							Item Name:
+						</td>
+						<td>
+							<input type="text" name="itemName" value="{{item.name}}">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Item Description:
+						</td>
+						<td>
+							<input type="text" name="itemDescription" value="{{item.description}}">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Item Price:
+						</td>
+						<td>
+							<input type="text" name="itemPrice" value="{{item.price}}">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Category:
+						</td>
+						<td>
+							<select name="itemCategory" id="category_id">
+								{% for category in categories %}
+									<option value="{{category.id}}">{{category.name}}</option>
+								{% endfor %}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		var sel = document.getElementById('category_id');
+		var opts = sel.options;
+		for (var opt, j=0; opt=opts[j]; j++) {
+			if(opt.value == {{item.category_id}}) {
+				sel.selectedIndex = j;
+				break;
+			}
+		}
+	</script>
+{% endblock %}

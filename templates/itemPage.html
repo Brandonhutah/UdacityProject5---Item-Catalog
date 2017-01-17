@@ -1,0 +1,20 @@
+{% extends "main_template.html" %}
+{% block content %}
+	<div class="row category-header">
+		<div class="col-6 center-vertical">
+				{{item.name}}
+		</div>
+		<div class="col-6 right-align center-vertical">
+			{% if user and user.id == item.user_id%}
+				<a href="/items/edit/{{item.id}}">Edit Item</a>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<p>{{item.description}}</p>
+			<strong>Catergory:</strong> {{item.category.name}} <strong>Price:</strong> {{item.price}}<br>
+			Created by {{item.user.name}}
+		</div>
+	</div>
+{% endblock %}

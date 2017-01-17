@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Item Catalog</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+	<div class="container">
+		<header class="row">
+			<div class="col-12 flasharea">
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+							{% for message in messages %}
+								{{message|safe}}
+							{% endfor %}
+						{% endif %}
+					{% endwith %}
+			</div>
+			<div class="col-6">
+				<h1><a href="/" class="main-logo">Item Catalog</a></h1>
+			</div>
+			<div class="col-6 right-align center-vertical">
+				{% if user %}
+					{{user.name}} | <a href="/gateway">Logout</a>
+				{% else %}
+					<a href="/gateway">Login</a>
+				{% endif %}
+			</div>
+		</header>
+		{% block content %}
+		{% endblock %}
+		<footer class="row">
+			<div class="col-12">
+				<hr>
+				&copy; 2017 Brandon Horlacher
+			</div>
+		</footer>
+	</div>
+</body>
+</html>
