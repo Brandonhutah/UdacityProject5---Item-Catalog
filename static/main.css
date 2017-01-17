@@ -188,11 +188,13 @@ img {
 }
 
 .error-flash {
+	border-radius: 25px;
 	text-align: center;
 	background-color: #ed7676;
 }
 
 .success-flash {
+	border-radius: 25px;
 	text-align: center;
 	background-color: #8bf49d;
 }
